@@ -22,4 +22,19 @@
     return font.pointSize * context.actualScaleFactor;
 }
 
+// Here used encoding could slightly help get encoding.
++ (void)downloadFileContent:(NSString *)urlString {
+    NSURL *urlToRequest = [NSURL URLWithString:urlString];
+    if (urlToRequest) {
+        NSError *err = nil;
+        NSStringEncoding encoding;
+        NSString *result = [NSString stringWithContentsOfURL:urlToRequest usedEncoding:&encoding error:&err];
+        if (err) {
+            NSLog(@"%@", err.localizedDescription);
+        } else {
+            NSLog(@"%@", result);
+        }
+    }
+}
+
 @end
