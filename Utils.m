@@ -37,4 +37,11 @@
     }
 }
 
++ (NSAttributedString *)attributedStringByString:(NSString *)string {
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"attributedString" ofType:@"plist"]];
+    NSError *error = nil;
+    NSAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[[dict objectForKey:@"abc"] dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSRTFTextDocumentType} documentAttributes:nil error:&error];
+    return attributedString;
+}
+
 @end

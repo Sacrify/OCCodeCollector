@@ -4,4 +4,6 @@
 
 + (void)downloadFileContent:(NSString *)urlString;
 
++ (NSAttributedString *)attributedStringByString:(NSString *)string;
+
 @end
