@@ -1,3 +1,30 @@
+
+@interface NSAttributedString (FontSize)
+- (NSAttributedString*) attributedStringWithFontSize:(CGFloat) fontSize;
+@end
+
+@implementation NSAttributedString (FontSize)
+- (NSAttributedString*) attributedStringWithFontSize:(CGFloat) fontSize {
+    NSMutableAttributedString* attributedString = [self mutableCopy];
+    {
+        [attributedString beginEditing];
+
+        [attributedString enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
+
+            UIFont* font = value;
+            font = [font fontWithSize:fontSize];
+
+            [attributedString removeAttribute:NSFontAttributeName range:range];
+            [attributedString addAttribute:NSFontAttributeName value:font range:range];
+        }];
+        
+        [attributedString endEditing];
+    }
+    return [attributedString copy];
+}
+
+@end
+
 @implementation Utility
 
 // - (void)adjustButtonsFontSize {
